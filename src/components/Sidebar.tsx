@@ -41,7 +41,7 @@ const Sidebar = async () => {
                     alt="verified"
                     width={20}
                     height={20}
-                    className={`${
+                    className={`pointer-events-none select-none ${
                       verifiedAccount.includes(user.username)
                         ? "block"
                         : "hidden"

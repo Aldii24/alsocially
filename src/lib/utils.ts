@@ -5,4 +5,4 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const verifiedAccount = ["aldiirawan748"];
+export const verifiedAccount = ["aldiirawan748", "balmonddganteng"];

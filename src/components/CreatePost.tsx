@@ -6,10 +6,9 @@ import { Card, CardContent } from "./ui/card";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { CheckCircle, ImageIcon, Loader2Icon, SendIcon } from "lucide-react";
+import { ImageIcon, Loader2Icon, SendIcon } from "lucide-react";
 import { createPost } from "@/actions/post.action";
 import toast from "react-hot-toast";
-import { cn } from "@/lib/utils";
 
 const CreatePost = () => {
   const { user } = useUser();
@@ -52,7 +51,7 @@ const CreatePost = () => {
               <AvatarImage src={user?.imageUrl || "/avatar.png"} />
             </Avatar>
             <Textarea
-              placeholder={`What's on your mind, sayang?`}
+              placeholder={`What's on your mind, ${user?.firstName}?`}
               className="min-h-[100px] resize-none border-none focus-visible:ring-0 text-base"
               value={content}
               onChange={(e) => setContent(e.target.value)}
