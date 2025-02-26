@@ -26,6 +26,8 @@ const CreatePost = () => {
     try {
       const result = await createPost(content, imageUrl);
 
+      if (!result) return;
+
       if (result.success) {
         toast.success("Post created successfully!");
 
