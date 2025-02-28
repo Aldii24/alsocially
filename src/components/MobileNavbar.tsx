@@ -17,16 +17,36 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth, SignInButton, SignOutButton } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import TextShimmerBasic from "./TextShimmerBasic";
+import { getNotifications } from "@/actions/notification.action";
+
+type Notifications = Awaited<ReturnType<typeof getNotifications>>;
+type Notification = Notifications[number];
 
 function MobileNavbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const { isSignedIn } = useAuth();
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const data = await getNotifications();
+        setNotifications(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchNotifications();
+  }, [notifications]);
+
+  const filteredNotifications = notifications.filter((n) => !n.read);
 
   return (
     <div className="flex md:hidden items-center space-x-2">
@@ -75,7 +95,14 @@ function MobileNavbar() {
                   onClick={() => setShowMobileMenu(false)}
                 >
                   <Link href="/notifications">
-                    <BellIcon className="w-4 h-4" />
+                    <div className="relative">
+                      <BellIcon className="w-4 h-4" />
+                      {filteredNotifications.length > 0 && (
+                        <span className="absolute top-0 right-0 inline-flex items-center justify-center px-[5px] py-[0.125rem] text-[8px] font-semibold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                          {filteredNotifications.length}
+                        </span>
+                      )}
+                    </div>
                     Notifications
                   </Link>
                 </Button>

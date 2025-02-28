@@ -232,7 +232,7 @@ const PostCard = ({
                           src={comment.author.image ?? "/avatar.png"}
                         />
                       </Avatar>
-                      <div className="w-[0.5px] h-[30px] bg-muted"></div>
+                      <div className="w-[0.5px] h-[30px] dark:bg-muted bg-gray-300"></div>
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">

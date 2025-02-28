@@ -4,9 +4,12 @@ import Link from "next/link";
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { ModeToggle } from "./ModeToggle";
+import { getNotificationsCount } from "@/actions/notification.action";
 
 async function DesktopNavbar() {
   const user = await currentUser();
+  const lengthNotifications = await getNotificationsCount();
+  if (!user) return null;
 
   return (
     <div className="hidden md:flex items-center space-x-4">
@@ -23,7 +26,14 @@ async function DesktopNavbar() {
         <>
           <Button variant="ghost" className="flex items-center gap-2" asChild>
             <Link href="/notifications">
-              <BellIcon className="w-4 h-4" />
+              <div className="relative">
+                <BellIcon className="w-4 h-4" />
+                {lengthNotifications > 0 && (
+                  <span className="absolute top-0 right-0 inline-flex items-center justify-center px-[5px] py-[0.125rem] text-[8px] font-semibold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                    {lengthNotifications}
+                  </span>
+                )}
+              </div>
               <span className="hidden lg:inline">Notifications</span>
             </Link>
           </Button>

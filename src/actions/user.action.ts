@@ -96,7 +96,7 @@ export const getRandomUser = async () => {
           },
         },
       },
-      take: 3,
+      take: 5,
     });
 
     return randomUser;
@@ -155,6 +155,7 @@ export const toggleFollow = async (targetUserId: string) => {
     }
 
     revalidatePath("/");
+
     return { success: true };
   } catch (error) {
     console.log(error);

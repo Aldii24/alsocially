@@ -4,7 +4,7 @@ import CreatePost from "@/components/CreatePost";
 import PostCard from "@/components/PostCard";
 import SuggestedUser from "@/components/SuggestedUser";
 import { currentUser } from "@clerk/nextjs/server";
-import { Post } from "@prisma/client";
+
 
 export default async function Home() {
   const user = await currentUser();
