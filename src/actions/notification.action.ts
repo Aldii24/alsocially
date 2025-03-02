@@ -81,6 +81,8 @@ export const getNotificationsCount = async () => {
       },
     });
 
+    if (!notifications) return 0;
+
     revalidatePath("/notifications");
     return notifications.length;
   } catch (error) {

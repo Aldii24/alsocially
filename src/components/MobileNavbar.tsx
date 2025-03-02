@@ -18,7 +18,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
-import { useAuth, SignInButton, SignOutButton } from "@clerk/nextjs";
+import { useAuth, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import TextShimmerBasic from "./TextShimmerBasic";
@@ -31,6 +31,7 @@ function MobileNavbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const { isSignedIn } = useAuth();
+  const { user } = useUser();
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -112,7 +113,11 @@ function MobileNavbar() {
                   asChild
                   onClick={() => setShowMobileMenu(false)}
                 >
-                  <Link href="/profile">
+                  <Link
+                    href={`/profile/${
+                      user?.emailAddresses[0].emailAddress.split("@")[0]
+                    }`}
+                  >
                     <UserIcon className="w-4 h-4" />
                     Profile
                   </Link>

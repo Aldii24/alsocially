@@ -32,15 +32,15 @@ const Sidebar = async () => {
                 <AvatarImage src={user.image || "/avatar.png"} />
               </Avatar>
 
-              <div className="mt-4 space-y-1">
-                <div className="flex items-center gap-1">
+              <div className="flex flex-col items-center justify-center mt-4 space-y-1">
+                <div className="flex items-center justify-center gap-1">
                   <h3 className="font-semibold">{user.name}</h3>
                   <Image
                     title="Verified"
                     src="/verified.png"
                     alt="verified"
-                    width={20}
-                    height={20}
+                    width={15}
+                    height={15}
                     className={`pointer-events-none select-none ${
                       verifiedAccount.includes(user.username)
                         ? "block"

@@ -226,14 +226,17 @@ const PostCard = ({
                 {/* DISPLAY COMMENTS */}
                 {post.comments.map((comment) => (
                   <div key={comment.id} className="flex space-x-3">
-                    <div className="flex items-center flex-col">
+                    <Link
+                      href={`/profile/${comment.author.username}`}
+                      className="flex items-center flex-col"
+                    >
                       <Avatar className="size-8 flex-shrink-0">
                         <AvatarImage
                           src={comment.author.image ?? "/avatar.png"}
                         />
                       </Avatar>
                       <div className="w-[0.5px] h-[30px] dark:bg-muted bg-gray-300"></div>
-                    </div>
+                    </Link>
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                         <div className="flex items-center gap-1">
