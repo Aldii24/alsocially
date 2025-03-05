@@ -2,8 +2,8 @@ import { Loader2 } from "lucide-react"
 
 const LoadingPage = () => {
   return (
-    <div>
-      <Loader2 />
+    <div className="flex justify-center items-center min-h-screen">
+      <Loader2 className="animate-spin"/>
     </div>
   )
 }
